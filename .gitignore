@@ -1,0 +1,12 @@
+node_modules
+dist
+*.local
+dev.log
+scripts/.tmp-*
+.DS_Store
+*.tsbuildinfo
+RECOVERED-session-*.md
+.kilo/
+
+# Holds the Printify token. Never commit it.
+.env
