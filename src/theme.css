@@ -525,3 +525,129 @@ button:focus-visible, input:focus-visible, select:focus-visible {
   .modal { padding: 12px; }
   .modal__body { padding: 14px; }
 }
+
+
+/* ---------- AI assistant / agent dock resilience ----------
+   The AI component may be inserted as an extra child of .workspace. Keep it
+   out of the editor grid so it cannot create an extra row and collapse the
+   canvas. These selectors intentionally only activate when an assistant-like
+   component is actually present. */
+.workspace { position: relative; isolation: isolate; }
+.workspace:has([class*="assistant" i], [class*="agent" i], [class*="chat" i]) > :nth-child(2) {
+  position: absolute !important;
+  z-index: 18;
+  right: 14px;
+  bottom: 224px;
+  width: min(380px, calc(100% - 28px));
+  max-width: calc(100% - 28px);
+  height: auto;
+  max-height: min(440px, calc(100% - 210px));
+  min-height: 0;
+  margin: 0;
+  align-self: auto;
+  justify-self: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid #d9e1f5;
+  border-radius: 16px;
+  background: rgba(255,255,255,.98);
+  color: #26334f;
+  box-shadow: 0 16px 48px rgba(37,52,88,.18), 0 2px 8px rgba(37,52,88,.06);
+}
+.workspace > [class*="assistant" i],
+.workspace > [class*="agent" i],
+.workspace > [class*="chat" i] {
+  position: absolute !important;
+  z-index: 18;
+  right: 14px;
+  bottom: 224px;
+  width: min(380px, calc(100% - 28px));
+  max-width: calc(100% - 28px);
+  height: auto;
+  max-height: min(440px, calc(100% - 210px));
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid #d9e1f5;
+  border-radius: 16px;
+  background: rgba(255,255,255,.98);
+  color: #26334f;
+  box-shadow: 0 16px 48px rgba(37,52,88,.18), 0 2px 8px rgba(37,52,88,.06);
+}
+.workspace [class*="assistant-panel" i],
+.workspace [class*="assistant__panel" i],
+.workspace [class*="agent-panel" i],
+.workspace [class*="chat-panel" i],
+.workspace [data-role="assistant-panel"] {
+  min-width: 0;
+  max-height: min(440px, calc(100vh - 180px));
+  overflow: hidden;
+  border: 1px solid #d9e1f5;
+  border-radius: 16px;
+  background: #fff;
+  color: #26334f;
+  box-shadow: 0 16px 48px rgba(37,52,88,.18);
+}
+.workspace [class*="assistant-header" i],
+.workspace [class*="assistant__header" i],
+.workspace [class*="agent-header" i],
+.workspace [class*="chat-header" i] {
+  background: #fff;
+  border-bottom: 1px solid #e9edf7;
+  padding: 12px 14px;
+}
+.workspace [class*="assistant-body" i],
+.workspace [class*="assistant__body" i],
+.workspace [class*="agent-body" i],
+.workspace [class*="chat-messages" i] {
+  min-height: 0;
+  overflow: auto;
+  background: #fff;
+  padding: 14px;
+}
+.workspace [class*="assistant-input" i],
+.workspace [class*="assistant__input" i],
+.workspace [class*="agent-input" i],
+.workspace [class*="chat-composer" i] {
+  background: #fff;
+  border-top: 1px solid #e9edf7;
+  padding: 10px;
+}
+.workspace [class*="assistant" i] button,
+.workspace [class*="agent" i] button,
+.workspace [class*="chat" i] button {
+  border-radius: 9px;
+}
+.workspace [class*="assistant" i] input,
+.workspace [class*="assistant" i] textarea,
+.workspace [class*="agent" i] input,
+.workspace [class*="agent" i] textarea,
+.workspace [class*="chat" i] input,
+.workspace [class*="chat" i] textarea {
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid #d9e1f2;
+  border-radius: 10px;
+  background: #f8faff;
+  padding: 9px 10px;
+  color: #26334f;
+}
+@media (max-width: 1120px) {
+  .workspace:has([class*="assistant" i], [class*="agent" i], [class*="chat" i]) > :nth-child(2),
+  .workspace > [class*="assistant" i],
+  .workspace > [class*="agent" i],
+  .workspace > [class*="chat" i] {
+    right: 10px;
+    bottom: 210px;
+    width: min(340px, calc(100% - 20px));
+  }
+}
+@media (max-height: 680px) {
+  .workspace:has([class*="assistant" i], [class*="agent" i], [class*="chat" i]) > :nth-child(2),
+  .workspace > [class*="assistant" i],
+  .workspace > [class*="agent" i],
+  .workspace > [class*="chat" i] {
+    bottom: 150px;
+    max-height: calc(100% - 160px);
+  }
+}
